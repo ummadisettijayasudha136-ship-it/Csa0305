@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node{ int data; struct Node* left; struct Node* right; };
+struct Node* newNode(int d){ struct Node* n=(struct Node*)malloc(sizeof(struct Node)); n->data=d;n->left=n->right=NULL;return n;}
+struct Node* insert(struct Node* root,int d){
+    if(!root) return newNode(d);
+    if(d<root->data) root->left=insert(root->left,d);
+    else root->right=insert(root->right,d);
+    return root;
+}
+void kthMin(struct Node* root,int k,int *c){
+    if(!root) return;
+    kthMin(root->left,k,c);
+    (*c)++;
+    if(*c==k){ printf("%d\n",root->data); return; }
+    kthMin(root->right,k,c);
+}
+int main(){
+    struct Node* root=NULL; int k=3,c=0;
+    root=insert(root,50); root=insert(root,30); root=insert(root,20);
+    root=insert(root,40); root=insert(root,70); root=insert(root,60); root=insert(root,80);
+    printf("3rd Min = "); kthMin(root,k,&c);
+    return 0;
+}
