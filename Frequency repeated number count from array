@@ -1,0 +1,12 @@
+#include <stdio.h>
+int main(){
+    int arr[]={1,2,2,3,3,3,4},n=7,count,max=0,freq;
+    for(int i=0;i<n;i++){
+        count=1;
+        for(int j=i+1;j<n;j++)
+            if(arr[i]==arr[j]) count++;
+        if(count>max){ max=count; freq=arr[i]; }
+    }
+    printf("Most frequent = %d (count %d)\n",freq,max);
+    return 0;
+}
