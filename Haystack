@@ -1,0 +1,10 @@
+#include <stdio.h>
+#include <string.h>
+int main(){
+    char hay[]="hello world", needle[]="world";
+    if(strstr(hay,needle))
+        printf("Substring found\n");
+    else printf("Not found\n");
+    return 0;
+}
+
