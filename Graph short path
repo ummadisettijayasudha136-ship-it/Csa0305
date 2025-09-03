@@ -1,0 +1,32 @@
+#include <stdio.h>
+#define V 4
+#define INF 9999
+
+void dijkstra(int G[V][V], int start) {
+    int cost[V][V], dist[V], visited[V], count, mindist, nextnode, i, j;
+    for (i=0;i<V;i++)
+        for (j=0;j<V;j++)
+            cost[i][j] = (G[i][j]==0) ? INF : G[i][j];
+    for (i=0;i<V;i++) {
+        dist[i]=cost[start][i]; visited[i]=0;
+    }
+    dist[start]=0; visited[start]=1;
+    count=1;
+    while (count<V-1) {
+        mindist=INF;
+        for(i=0;i<V;i++)
+            if(dist[i]<mindist && !visited[i]) {mindist=dist[i]; nextnode=i;}
+        visited[nextnode]=1;
+        for(i=0;i<V;i++)
+            if(!visited[i] && mindist+cost[nextnode][i]<dist[i])
+                dist[i]=mindist+cost[nextnode][i];
+        count++;
+    }
+    for(i=0;i<V;i++)
+        printf("Distance from %d to %d = %d\n", start, i, dist[i]);
+}
+int main() {
+    int G[V][V]={{0,1,4,0},{1,0,2,7},{4,2,0,3},{0,7,3,0}};
+    dijkstra(G,0);
+    return 0;
+}
