@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <ctype.h>  // for isalpha()
+
+int isValidString(char str[]) {
+    int i = 0;
+    if (str[0] == '\0') // empty string check
+        return 0;
+
+    while (str[i] != '\0') {
+        if (!isalpha(str[i]))  // if not alphabet
+            return 0;
+        i++;
+    }
+    return 1; // valid
+}
+
+int main() {
+    char str[100];
+
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    if (isValidString(str))
+        printf("Valid String\n");
+    else
+        printf("Invalid String\n");
+
+    return 0;
+}
